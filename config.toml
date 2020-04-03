@@ -1,0 +1,17 @@
+baseURL = "http://example.org/"
+languageCode = "en-us"
+title = "Ramon Blog"
+theme = "hugo-theme-cleanwhite"
+preserveTaxonomyNames = true
+paginate = 5 #frontpage pagination
+hasCJKLanguage = true
+
+[params]
+  header_image = "img/home-bg-jeep.jpg"
+  SEOTitle = "Ramon Blog"
+  description = "The Ramon personal blog"
+  keyword = "Ramon, Macias, Blog, Go, Computer"
+  slogan = "Be nil my friend"
+
+  # Sidebar settings
+  sidebar_about_description = "Software Developer, Open Source Enthusiast and Life Adventurer"
