@@ -7,14 +7,26 @@ paginate = 5 #frontpage pagination
 hasCJKLanguage = true
 
 [params]
-  header_image = "img/home-bg-jeep.jpg"
+  header_image = "img/tavascan_winter.jpg"
   SEOTitle = "Ramon Blog"
   description = "The Ramon personal blog"
   keyword = "Ramon, Macias, Blog, Go, Computer"
   slogan = "Be nil my friend"
 
+  image_404 = "img/404-bg.jpg"
+  title_404 = "Sorry we can't find your page :("
+  omit_categories = false
+
   # Sidebar settings
   sidebar_about_description = "Software Developer, Open Source Enthusiast and Life Adventurer"
+  sidebar_avatar = "img/zhaohuabing.png"
+
+  featured_tags = false
+  featured_condition_size = 1
+
+  friends = false
+  bookmarks = false
+  about_me = true
 
   [params.social]
   rss = true
