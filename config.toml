@@ -1,6 +1,6 @@
 baseURL = "https://ramonmacias.github.io/"
 languageCode = "en-us"
-title = "Blog Not Found"
+title = "El Met"
 theme = "hugo-theme-cleanwhite"
 preserveTaxonomyNames = true
 paginate = 5 #frontpage pagination
@@ -18,8 +18,8 @@ hasCJKLanguage = true
   omit_categories = false
 
   # Sidebar settings
-  sidebar_about_description = "Software Developer, Open Source Enthusiast and Life Adventurer"
-  sidebar_avatar = "img/zhaohuabing.png"
+  sidebar_about_description = "Software Developer"
+  sidebar_avatar = "img/ramon.jpg"
 
   featured_tags = false
   featured_condition_size = 1

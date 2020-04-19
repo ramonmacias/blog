@@ -1,7 +1,12 @@
-The passion for technology and innovation motivated me to study my degree in Computer Science. After a few years of experience, I still have the same impulse for learning new things every day, therefore I consider myself a person who adapts easily to new challenges.
+# Life
 
-I am also a nature and sports lover that makes me have a good balance in my personal and professional life. In addition, I love to discover new cultures through their cuisine and nature.
+> “If there is any one secret of success, it lies in the ability to get the other person's point of view and see things from that person's angle as well as from your own. Henry Ford”
 
-I’m looking forward always to start a new project that allows me to keep pursuing my passion as well as I increase my Computer Science knowledge abroad.
 
-My name is **Ramon Macias** and this is my personal blog where I will try to share what I learned as a computer engineer, and also I will use it as a tool for keep improving my english skills, what is for me one of the key skill you should have if you want to be a better engineer.
+My name is Ramon Macias, I was born in Manzanares Spain, but I moved to a small town in the middleware of the Catalan Pyrenees when I was 1 year old. The passion for computer science started when I had my first computer, and as you can imagine, I used it for play video games, I was fascinated about how all these games can simulate some parts of the real world, and all these years there we have been seeing the evolution on the video games. Also I realised that all of these video games were made but someone, and decided then, I want to become one of these guys that make this awesome things.
+
+So this means the decision was more or less clear since the beginning, and this is why I decided to start my degree in computer engineering in the UAB (Universitat Autonoma de Barcelona). After I finished my degree on computer engineering, I started my professional career. My first job was on a small company where I was working for the city council of Barcelona, as well as, with the private bank in Andorra. On that work I improved my knowledge about Java and learnt new libraries, such as Hibernate and Spring. On my second role, I faced the challenge of been part of a startup company, and there is where I first learnt Go, also learnt a bunch of new cool stuff related with Architecture, as well as, starting to build mobile apps on native Android with Java. The next job was on a logistic company, where I improve my knowledge about architecure, as well as, I learnt a new language Ruby. Currently I’m working on Sydney where I’m facing a new challenge in my professional career, live in a foreign country with a non native language, so this stage of my life I’m going deep into Go and also learning a bit of a new tech, named Vue.
+
+I’m huge fan of the nature in general, but specially about  mountains. I love practice a different kind of sport such as trailrunning, BTT, climbing or splitboarding and I’m always open to learn about new ones. I love travel, also discover new cultures and different views of the world, specially through their gastronomies. So that's a bit about me, I will try to keep this blog only focus on tech staff but, who knows! maybe in a future I start to write about other things!
+
+![](/img/bastiments.jpg)
