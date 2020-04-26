@@ -21,7 +21,7 @@ hasCJKLanguage = true
   sidebar_about_description = "Software Developer"
   sidebar_avatar = "img/ramon.jpg"
 
-  featured_tags = false
+  featured_tags = true
   featured_condition_size = 1
 
   friends = false
@@ -37,3 +37,20 @@ hasCJKLanguage = true
   [[params.addtional_menus]]
   title =  "ABOUT"
   href =  "/top/about/"
+
+[outputFormats.Algolia]
+baseName = "algolia"
+isPlainText = true
+mediaType = "application/json"
+notAlternative = true
+
+[params.algolia]
+vars = ["title", "summary", "date", "publishdate", "expirydate", "permalink"]
+params = ["categories", "tags"]
+
+[markup]
+  [markup.tableOfContents]
+    endLevel = 2
+    startLevel = 1
+  [markup.highlight]
+    style = "dracula"
