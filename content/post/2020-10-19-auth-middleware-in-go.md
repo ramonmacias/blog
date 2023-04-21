@@ -5,7 +5,7 @@ subtitle: "A simple proposal for auth middleware"
 date: 2020-10-19
 author: "Ramon"
 URL: "/2020/10/19/auth-middleware-in-go/"
-image: "img/sunset-collada-verda.jpg"
+image: "img/menorca_spring.jpg"
 tags:
     - Go
     - Auth
