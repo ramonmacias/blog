@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Go on El Met</title>
+    <link>https://ramonmacias.github.io/tags/go/</link>
+    <description>Recent content in Go on El Met</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 19 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://ramonmacias.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Auth Middleware in Go</title>
+      <link>https://ramonmacias.github.io/2020/10/19/auth-middleware-in-go/</link>
+      <pubDate>Mon, 19 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://ramonmacias.github.io/2020/10/19/auth-middleware-in-go/</guid>
+      <description>We’re just enthusiastic about what we do. &amp;ndash; Steve Jobs
+Proposal I have many reasons why I fell in love with Go, when I started working with go there wasn&amp;rsquo;t too much packages at that moment, so basically you needed to built everything from scratch, this was a great experience because I learnt a lot of basic concepts related with client and server comunications, that I didn&amp;rsquo;t learn before in other languages because we used big frameworks such as Spring in Java.</description>
+    </item>
+    
+    <item>
+      <title>Spaceship Shooter Game</title>
+      <link>https://ramonmacias.github.io/2020/06/27/spaceship-shooter/</link>
+      <pubDate>Sat, 27 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://ramonmacias.github.io/2020/06/27/spaceship-shooter/</guid>
+      <description>90% of what is considered &amp;ldquo;impossible&amp;rdquo; is, in fact, possible. The other 10% will become possible with the passage of time &amp;amp; technology. &amp;ndash; Hideo Kojima
+Game Probably one of the main motivation that I had when I was young, was the passion for video games, and this leads me to explore what is now my current professional career, computer engineer. Of course my main focus when I was young, is just play for fun, basically most of time I was thinking on having fun and nothing more, but is also true that sometimes I realised how real are some games.</description>
+    </item>
+    
+    <item>
+      <title>Limit/Offset</title>
+      <link>https://ramonmacias.github.io/2020/04/26/limit-offset-pagination/</link>
+      <pubDate>Sun, 26 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://ramonmacias.github.io/2020/04/26/limit-offset-pagination/</guid>
+      <description>The computer was born to solve problems that did not exist before. &amp;ndash; Bill Gates
+Pagination One of the most common feature that we will face at some point as a backend engineer, is how to deal with pagination on the server side. Exists different ways for implement that, and as you can imagine, each one has it good and bad points. On this post I will try to implement the most basic one in Go.</description>
+    </item>
+    
+  </channel>
+</rss>

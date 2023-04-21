@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="El Met">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="img/newcastle.jpg">
+    <meta property="twitter:image" content="img/newcastle.jpg" />
+    
+
+    
+    <meta name="title" content="Spaceship Shooter Game" />
+    <meta property="og:title" content="Spaceship Shooter Game" />
+    <meta property="twitter:title" content="Spaceship Shooter Game" />
+    
+
+    
+    <meta name="description" content="The Ramon personal blog">
+    <meta property="og:description" content="The Ramon personal blog" />
+    <meta property="twitter:description" content="The Ramon personal blog" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="Ramon, Macias, Blog, Go, Computer">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Spaceship Shooter Game | Ramon Blog</title>
+
+    <link rel="canonical" href="/2020/06/27/spaceship-shooter/">
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.15.1/css/all.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">El Met</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">All Posts</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/top/about//">ABOUT</a></li>
+                    
+		            <li>
+                        <a href="/search"><i class="fa fa-search"></i></a>
+		           </li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/newcastle.jpg')
+    }
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/go" title="Go">
+                            Go
+                        </a>
+                        
+                        <a class="tag" href="/tags/game" title="Game">
+                            Game
+                        </a>
+                        
+                    </div>
+                    <h1>Spaceship Shooter Game</h1>
+                    <h2 class="subheading">My first game implemented in Go</h2>
+                    <span class="meta">
+                        
+                            Posted by 
+                            
+                                Ramon
+                             
+                            on 
+                            Saturday, June 27, 2020
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <blockquote>
+<p>90% of what is considered &ldquo;impossible&rdquo; is, in fact, possible. The other 10% will become possible with the passage of time &amp; technology. &ndash; Hideo Kojima</p>
+</blockquote>
+<h2 id="game">Game</h2>
+<p>Probably one of the main motivation that I had when I was young, was the passion for video games, and this leads me to explore what is now my current professional career, computer engineer. Of course my main focus when I was young, is just play for fun, basically most of time I was thinking on having fun and nothing more, but is also true that sometimes I realised how real are some games. I remember been playing with a football game, and a part of having fun, I though on how real it is and that this is not magic, this game is made but some human and I wanted to be part of this group of people that has the chance of develop this &ldquo;magic&rdquo;.</p>
+<p>Sadly to say, that nowadays I&rsquo;m not working as a game developer (who knows the future!), but my professional career has led me to discover and learn one of my favourites programming languages, Go.</p>
+<p>So, of course, if at some point I need to code on my spare time a video game, this should be coded using Go!. Also I had no idea about how to start, how to structure the basics of a game, so I took some inspirations from this blog, <a href="https://mortenson.coffee/blog/making-multiplayer-game-go-and-grpc/">https://mortenson.coffee/blog/making-multiplayer-game-go-and-grpc/</a> and I tried to do a similar game but from my point of view. The game is basically a shooter, you have a spaceship using an A on the map, and you are able to shoot a laser, represented by a red X on the map, and the enemies are represented as Y on the map. So the game ends when you die or when you kill all the enemies on the map.</p>
+<h2 id="code-insights">Code insights</h2>
+<p>My idea on this section is to talk a little bit about the code itself, and to go deep on some details I found interesting to comment. So on the next screenshot you will see how I arch the game.</p>
+<p>
+  <img src="/img/tree_go_spaceship.png" alt="">
+
+</p>
+<p>We can see different things on the screenshot above, first point is that we use go modules on this project and we have a Makefile for manage our game, this makefile has only two commands, run and test.</p>
+<pre tabindex="0"><code>// Will do a go run, this will build the go binary and will run the game
+$ make run
+
+// This command will execute all the tests
+$ make test
+</code></pre><p>We can find all the base code inside the two main directories, <strong>cmd and internal</strong>, on the cmd directory we will find the main package which is used for define and start the basics of the game and will be the start point for run our game. On the other hand we have the internal directory, inside this directory we keep all the game core, we divide this core code into two packages, <strong>game and view</strong>. So is a basic split between the logic of the game and how we draw the game itself, with that we can easily plug another library for render the game, on this case we used <a href="https://github.com/rivo/tview">https://github.com/rivo/tview</a> for render the game on the terminal. Let&rsquo;s take a look now at some pieces inside the game package.</p>
+<h2 id="engine">Engine</h2>
+<pre tabindex="0"><code>// Engine type will keep all the main information related with the game
+type Engine struct {
+	// Actors keep the information and link about all the interactors of the
+	// game
+	Actors map[uuid.UUID]Actor
+	// GameMap keep link to the current map is playing
+	GameMap Map
+	// ActionChan is a buffered channel used for comunication between view and the
+	// engine
+	ActionChan chan Action
+	// Score keep the info related with points and actors
+	Score map[uuid.UUID]int
+	// RoundWinner keep the id for the winner
+	RoundWinner uuid.UUID
+	// LevelComplete is the flag that determines when the level is complete
+	LevelComplete bool
+	// GameOver is the flag that determines when the player dies
+	GameOver bool
+	// Lasers keep the information about each lasers on the map
+	Lasers sync.Map
+	// Bots keep the information about bots on the map
+	Bots sync.Map
+}
+</code></pre><p>The Engine type hold the core central structure of the game, some of the interesting things here could be the own custom Map that use an array of arrays of runes as a base type, also we use a go channel, ActionChan, that will in charge of receive all the different actions (movement and lasers) from the view and also we use sync.Map for all this data that needs to avoid any kind of collision and be sure there is no concurrency problems.</p>
+<h2 id="bots">Bots</h2>
+<pre tabindex="0"><code>// Bot represents the basic information needed for handle all the AI enemies on
+// the game
+type Bot struct {
+	ID       uuid.UUID
+	Life     int
+	Position Point
+	Strategy BotStrategy
+}
+</code></pre><p>As we can see, our enemies on the game are bots, the type above represents the basic information for define a Bot, which is a unique identifier, how many life it has, the current position on the map and the strategy that is following. We define four different bot strategies:</p>
+<pre tabindex="0"><code>// BotStrategy holds the specific strategy in terms of movement and shootin that
+// the bot is going to follow
+type BotStrategy int
+
+const (
+	// NoMovementStrategy defines the bot will be just stopped
+	NoMovementStrategy BotStrategy = iota
+	// OnlyMovementStrategy defines the bot will be in movement but no shooting
+	OnlyMovementStrategy
+	// OnlyShootingStrategy defines the bot will be shooting all the time but without
+	// movement
+	OnlyShootingStrategy
+	// ShootAndMoveStrategy define the bot will be in movement and shooting
+	ShootAndMoveStrategy
+)
+</code></pre><p>So the first option, <strong>NoMovementStrategy</strong> means that this bot is doing nothing, just stuck on his initial position and nothing more. The second option is a bit more funny <strong>OnlyMovementStrategy</strong>, this means the bot with this strategy will keep moving on random direction until dies, the third option is <strong>OnlyShootingStrategy</strong>, that means is on a fixed position but shooting on random directions and the last one is a mix of the last two, <strong>ShootAndMoveStrategy</strong> defines a bot that is moving and shooting in random directions. On the next piece of code you will see how we code the last strategy, the following code belongs to a switch case inside a function</p>
+<pre tabindex="0"><code>case ShootAndMoveStrategy:
+  movementTicker := time.NewTicker(200 * time.Millisecond)
+  shootingTicker := time.NewTicker(900 * time.Millisecond)
+  for {
+    b, exists := e.Bots.Load(bot.ID)
+    if !exists {
+      return
+    }
+    bot := b.(Bot)
+    select {
+    case &lt;-movementTicker.C:
+      e.ActionChan &lt;- &amp;BotMoveAction{
+        BotID:     bot.ID,
+        Direction: RandomDirection(),
+        CreatedAt: time.Now(),
+      }
+    case &lt;-shootingTicker.C:
+      laserID := uuid.Must(uuid.NewV4())
+      e.Lasers.Store(laserID, Laser{
+        ID:       laserID,
+        Position: bot.Position,
+        Origin:   OriginBot,
+      })
+      e.ActionChan &lt;- &amp;LaserAction{
+        LaserID:   laserID,
+        Direction: RandomDirection(),
+        CreatedAt: time.Now(),
+      }
+    default:
+    }
+  }
+</code></pre><p>I’m using two time.Tickers, that will send a signal over a channel on a period of time, once I received the movementTicker tick, we create a new movement action and we send it using the engine action channel, so the shootingTicker will do the same but sending a laser action instead. So as I said on the comment above, this piece of code is running inside a function, and this function is running over a new go routine, the next piece of code we can see how we do that.</p>
+<pre tabindex="0"><code>// startBots will apply all the strategies linked to each bot
+func (e *Engine) startBots() {
+	e.Bots.Range(func(key interface{}, value interface{}) bool {
+		bot := value.(Bot)
+		go bot.Strategy.perform(e, bot)
+		return true
+	})
+}
+</code></pre><h2 id="main">Main</h2>
+<pre tabindex="0"><code>func main() {
+	player := game.Actor{
+		ID:   uuid.Must(uuid.NewV4()),
+		Name: &#34;Ramon&#34;,
+		Position: game.Point{
+			X: 0,
+			Y: 0,
+		},
+		Life: 3,
+	}
+	actors := make(map[uuid.UUID]game.Actor)
+	actors[player.ID] = player
+	engine := game.NewEngine(
+		game.SetMap(MapDefault),
+		game.SetActors(actors),
+		game.SetBots([]game.BotStrategy{
+			game.OnlyMovementStrategy, game.OnlyMovementStrategy, game.OnlyMovementStrategy, game.OnlyMovementStrategy,
+			game.OnlyMovementStrategy, game.OnlyMovementStrategy, game.ShootAndMoveStrategy, game.OnlyMovementStrategy,
+		}),
+	)
+	engine.Start()
+	userInterface := view.New(engine)
+	userInterface.MainPlayerID = player.ID
+	userInterface.Start()
+
+	err := &lt;-userInterface.ErrChan
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+</code></pre><p>So the main function is pretty simple, we create an actor as a main player, and we fill with basic information needed, as the unique identifier, the name, initial position and the life. After this we add this player on the actors map and we generate the game engine using functional programming, setting the map, actors and all the bots with their own strategies.</p>
+<p>With all this setup we can start the engine, that is going to listen for the events, on this case through the action channel. After this we build the view, attaching the game engine as a dependency and we start the view, drawing all the needed (map, player and bots) and as well setup all the listeners for react to the user (shooting lasers and moving the main spaceship).</p>
+<h2 id="todo">TODO</h2>
+<p>So if you want to check all the other details about the implementation, feel free to go <a href="https://github.com/ramonmacias/go-spaceship-shooter">https://github.com/ramonmacias/go-spaceship-shooter</a> and take a look into the code and try the game!</p>
+<p>On the original post, Mortenson also develop a gRPC server and a multiplayer. I will take that as thing TODO on the next game, I think is a good idea for understand a bit more the world of gRPC. The next video will show you a gameplay</p>
+<video width="100%" height="340" controls>
+  <source src="/img/recording_game.mov" type="video/mp4">
+</video>
+
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/04/26/limit-offset-pagination/" data-toggle="tooltip" data-placement="top" title="Limit/Offset">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2020/10/19/auth-middleware-in-go/" data-toggle="tooltip" data-placement="top" title="Auth Middleware in Go">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+                
+
+                
+
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/go" title="go">
+                            go
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">                  
+                    
+                    <li>
+                        <a href="mailto:ramonmaciasgarcia@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    
+                    
+
+		            
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/ramonmacias">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/ramon-macias-garcia-4a407365/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="El Met" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; El Met 2023
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>

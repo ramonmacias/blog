@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Auth on El Met</title>
+    <link>https://ramonmacias.github.io/tags/auth/</link>
+    <description>Recent content in Auth on El Met</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 19 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://ramonmacias.github.io/tags/auth/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Auth Middleware in Go</title>
+      <link>https://ramonmacias.github.io/2020/10/19/auth-middleware-in-go/</link>
+      <pubDate>Mon, 19 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://ramonmacias.github.io/2020/10/19/auth-middleware-in-go/</guid>
+      <description>We’re just enthusiastic about what we do. &amp;ndash; Steve Jobs
+Proposal I have many reasons why I fell in love with Go, when I started working with go there wasn&amp;rsquo;t too much packages at that moment, so basically you needed to built everything from scratch, this was a great experience because I learnt a lot of basic concepts related with client and server comunications, that I didn&amp;rsquo;t learn before in other languages because we used big frameworks such as Spring in Java.</description>
+    </item>
+    
+  </channel>
+</rss>

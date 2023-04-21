@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="El Met">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="img/sunset-collada-verda.jpg">
+    <meta property="twitter:image" content="img/sunset-collada-verda.jpg" />
+    
+
+    
+    <meta name="title" content="Auth Middleware in Go" />
+    <meta property="og:title" content="Auth Middleware in Go" />
+    <meta property="twitter:title" content="Auth Middleware in Go" />
+    
+
+    
+    <meta name="description" content="The Ramon personal blog">
+    <meta property="og:description" content="The Ramon personal blog" />
+    <meta property="twitter:description" content="The Ramon personal blog" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="Ramon, Macias, Blog, Go, Computer">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Auth Middleware in Go | Ramon Blog</title>
+
+    <link rel="canonical" href="/2020/10/19/auth-middleware-in-go/">
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.15.1/css/all.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">El Met</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">All Posts</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/top/about//">ABOUT</a></li>
+                    
+		            <li>
+                        <a href="/search"><i class="fa fa-search"></i></a>
+		           </li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/sunset-collada-verda.jpg')
+    }
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/go" title="Go">
+                            Go
+                        </a>
+                        
+                        <a class="tag" href="/tags/auth" title="Auth">
+                            Auth
+                        </a>
+                        
+                    </div>
+                    <h1>Auth Middleware in Go</h1>
+                    <h2 class="subheading">A simple proposal for auth middleware</h2>
+                    <span class="meta">
+                        
+                            Posted by 
+                            
+                                Ramon
+                             
+                            on 
+                            Monday, October 19, 2020
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <blockquote>
+<p>We’re just enthusiastic about what we do. &ndash; Steve Jobs</p>
+</blockquote>
+<h2 id="proposal">Proposal</h2>
+<p>I have many reasons why I fell in love with Go, when I started working with go there wasn&rsquo;t too much packages at that moment, so basically you needed to built everything from scratch, this was a great experience because I learnt a lot of basic concepts related with client and server comunications, that I didn&rsquo;t learn before in other languages because we used big frameworks such as Spring in Java. During my professional career I was focus on improve my knowledge about design, creation and maintaining of APIs, and one of the first thing that you will probably learn is how I can add a auth layer to my API. The aim of this blog is to show my proposal of a simple middleware that will authenticate your requests.</p>
+<p>One of the packages I have been using for a long time is <a href="https://github.com/gorilla/mux">https://github.com/gorilla/mux</a> so for me it makes sense to use it as a base for this middleware. If you want to see all the code we are about to talk, go here <a href="https://github.com/ramonmacias/go-auth-middleware">https://github.com/ramonmacias/go-auth-middleware</a>.</p>
+<h2 id="packages">Packages</h2>
+<p>On this project we have three main packages</p>
+<ul>
+<li><strong>api</strong>: this package provides an implementation of error interface for the api layer.</li>
+<li><strong>auth</strong>: this package provides an auth.Provider interface, a JWT implementation of that interface and a cookies service.</li>
+<li><strong>middleware</strong>: this package provides a two different approaches of how to implement the auth with a bearer token, one based on Authorization header and the other one based on cookies.</li>
+</ul>
+<h2 id="concerns">Concerns</h2>
+<p>Before we start with the two different approaches there is two things that we should comment. The first one is related with auth package, there you will find and auth.Provider interface and an implementation based on JWT, so if we want to create a new auth.Provider based on JWT we should use this.</p>
+<pre tabindex="0"><code>provider := auth.NewJWTProvider(signingKey, tokenExpiryTime)
+</code></pre><p>The second thing that we should talk about, is the function we have on the middleware package</p>
+<pre tabindex="0"><code>// ValidForRefresh is a function that can be used for give an
+// extra context on the middleware about is the business layer
+// accept this user as a valid user
+type ValidForRefresh func(userSession *auth.Session) error
+</code></pre><p>I realized that sometimes we need to apply some kind of validation before we let the user update his token, for example we can have some user status and depending on which status is the given user we should or not allow it to refresh the token (ban a user), but it could be a lot more of validation that we can apply depending on the business layer. So this func could be useful for apply those validations.</p>
+<p>On this project you will find two different approaches of how I managed the authentication request process, the first one is using the Authorization header and the second one is based on Cookies, both have advantatges and disadvantatges, so you can choose whatever suits better on your project. Both services are using <a href="https://github.com/gorilla/mux">https://github.com/gorilla/mux</a> as a base for setup the server and his routes.</p>
+<h2 id="authorization-header-based">Authorization header based</h2>
+<p>The authorization header approach will take the bearer token from the Authorization http header, using the value on this way <strong>Bearer $TOKEN</strong>, once it receives this token, the middleware will check if the token is valid or not, if is not valid, it could be because is expired, so we will check if we are allowed to refresh the token and answer back with a specific refresh token error message, this kind of error should we used from the client in order to ask for a new refreshed token. If the token is invalid or mallformed, the middleware will answer back with a forbidden or unathorized errors. If the token is valid, then the request will reach the final handler, adding on the context request the given session.</p>
+<p>In order to add this middleware on your routing:</p>
+<pre tabindex="0"><code>router := mux.NewRouter()
+router.HandleFunc(&#34;/&#34;, sampleHandler)
+router.Use(middleware.AuthAPI(authProvider, middleware.ValidForRefresh()))
+</code></pre><p>Then your sampleHandler should be something like this:</p>
+<pre tabindex="0"><code>func sampleHandler(wr http.ResponseWriter, r *http.Request) {
+  session := middleware.GetSessionFromContext(r)
+  // Add here the rest of the handler logic
+}
+</code></pre><p>The next figure will show you a sample of how it can work your API with this middleware</p>
+<p>
+  <img src="/img/authorization-header-based.jpg" alt="">
+
+</p>
+<h2 id="cookie-based">Cookie based</h2>
+<p>The Cookie based approach is working similar to the Authorization header, but the main difference is that we use a cookie for transport the token between the client and the server. On this case we need to use a cookie named <strong>bearer-token</strong> and inside the cookie value we should have our token. Once the request reach our middleware we will validate the token inside the cookie, in case the token is expired and we are able to refresh it, we will do it and we are going to update the token in the cookie so we can keep the session alive, in case the token is not valid we will expire the cookie, so the client need to ask for a new cookie (login). If the token is valid then the request will reach the final hanlder keeping the session on the request context.</p>
+<p>In order to add this middleware on your routing:</p>
+<pre tabindex="0"><code>router := mux.NewRouter()
+router.HandleFunc(&#34;/&#34;, sampleHandler)
+router.Use(middleware.AuthCookieAPI(authProvider, middleware.ValidForRefresh()))
+</code></pre><p>Then your sampleHandler should be something like this:</p>
+<pre tabindex="0"><code>func sampleHandler(wr http.ResponseWriter, r *http.Request) {
+  session := middleware.GetSessionFromContext(r)
+  // Add here the rest of the handler logic
+}
+</code></pre><p>The next figure will show you a sample of how it can work your API with this middleware</p>
+<p>
+  <img src="/img/cookie-based.jpg" alt="">
+
+</p>
+
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/06/27/spaceship-shooter/" data-toggle="tooltip" data-placement="top" title="Spaceship Shooter Game">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2023/04/21/tech-book-club/" data-toggle="tooltip" data-placement="top" title="Tech Book Club">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+                
+
+                
+
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/go" title="go">
+                            go
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">                  
+                    
+                    <li>
+                        <a href="mailto:ramonmaciasgarcia@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    
+                    
+
+		            
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/ramonmacias">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/ramon-macias-garcia-4a407365/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="El Met" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; El Met 2023
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>

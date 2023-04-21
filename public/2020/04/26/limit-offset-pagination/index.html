@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="El Met">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="img/playa_de_las_cuevas.jpg">
+    <meta property="twitter:image" content="img/playa_de_las_cuevas.jpg" />
+    
+
+    
+    <meta name="title" content="Limit/Offset" />
+    <meta property="og:title" content="Limit/Offset" />
+    <meta property="twitter:title" content="Limit/Offset" />
+    
+
+    
+    <meta name="description" content="The Ramon personal blog">
+    <meta property="og:description" content="The Ramon personal blog" />
+    <meta property="twitter:description" content="The Ramon personal blog" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="Ramon, Macias, Blog, Go, Computer">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Limit/Offset | Ramon Blog</title>
+
+    <link rel="canonical" href="/2020/04/26/limit-offset-pagination/">
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.15.1/css/all.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">El Met</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">All Posts</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/top/about//">ABOUT</a></li>
+                    
+		            <li>
+                        <a href="/search"><i class="fa fa-search"></i></a>
+		           </li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/playa_de_las_cuevas.jpg')
+    }
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/go" title="Go">
+                            Go
+                        </a>
+                        
+                        <a class="tag" href="/tags/pagination" title="Pagination">
+                            Pagination
+                        </a>
+                        
+                    </div>
+                    <h1>Limit/Offset</h1>
+                    <h2 class="subheading">An implementation of limit/offset pagination in Go</h2>
+                    <span class="meta">
+                        
+                            Posted by 
+                            
+                                Ramon
+                             
+                            on 
+                            Sunday, April 26, 2020
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <blockquote>
+<p>The computer was born to solve problems that did not exist before. &ndash; Bill Gates</p>
+</blockquote>
+<h2 id="pagination">Pagination</h2>
+<p>One of the most common feature that we will face at some point as a backend engineer, is how to deal with pagination on the server side. Exists different ways for implement that, and as you can imagine, each one has it good and bad points. On this post I will try to implement the most basic one in Go.</p>
+<p>So what&rsquo;s exactly the limit/offset approach? Most of the approaches about pagination ends with a query with the LIMIT and OFFSET values at the end of it, so the value on the limit, as the name says, is a limitation on the numbers of results you will receive from the query, for example if you want to have pages with a size of 10, the limit variable should take the value of 10. The offset value is basically the start point for the specific query, so for example the first page will take the offset value of 0, and the second page, if we take into account the page size is 10, it will be as well 10 for the offset var, 20 for the third page and so on until the end.</p>
+<p>This technique is easy to implement but presents two big problems. Result <strong>inconsistency</strong> and <strong>offset inefficiency</strong>. The inconsistency on this technique appears because we are not working each time with the same dataset, so take the following example, let&rsquo;s say we did a first call and received all the data of the first page, let&rsquo;s says 10 items, so we print these items and we ask for the second page, but as you can see, there is a gap time between, the call of the first page and the second page. So let&rsquo;s imagine, that on this gap of time, we insert a new item in our dataset, that will should be shown on the first page. This will lead us to an inconsistency because we will have again on the second page the last item of the first page, and we will miss this new item on that case. The offset inefficiency comes by the shifting the results by a large offset.</p>
+<p>Another big issue that presents this solution, is that you have no idea about how many items you will have, this simplifies the implementation, due we don&rsquo;t need to do an extra count query but, you lose the feature of moving to a specific page number or print how many pages you will have. But the point is, it worth the time of coding this approach and also to have to deal with the extra counter query? Sometimes yes but most of the times the customer doesn&rsquo;t care and most of the times they only want to be able to search and also sort the list.</p>
+<h2 id="implementation">Implementation</h2>
+<p>I implemented a solution for that problem that you can check <a href="https://github.com/ramonmacias/go-pagination/tree/master/limit-offset">here</a>. On this repository I will try to post some other approaches, feel free to take the code an add it into your own pagination package.</p>
+<p>All this package relies on the JSON API specification (<a href="https://jsonapi.org/format/#fetching-pagination">https://jsonapi.org/format/#fetching-pagination</a>) that defines the format of the parameters to use (page[limit] and page[offset]), as well the format of the JSON payload with the definition of the links object.</p>
+<p>The pagination package also allows us to sort the query, for this case I didn&rsquo;t follow 100% the JSON API specification (<a href="https://jsonapi.org/format/#fetching-sorting)">https://jsonapi.org/format/#fetching-sorting)</a>, the specification says we should format the sort parameter in the next way. The sort order for each field should be ascending unless it is prefixed with a minus, that means for example</p>
+<pre tabindex="0"><code>GET /articles?sort=-created,title
+</code></pre><p>This endpoint will order by desc the created field and asc the title field, I decided to use the format of <strong>field_name.order_sort</strong>, so the above sample will be</p>
+<pre tabindex="0"><code>GET /articles?sort=created.desc,title.asc
+</code></pre><p>Why I decided to apply this approach? I think one of the key values when you are writing code is that should be legible, which means that with a quick look I should be able to understand what&rsquo;s going to happen, so in my opinion the second approach is more legible than the first one. But on the other hand we use more characters than we needed for do the same.</p>
+<p>This pagination as I said at the begining works using the approach of limit and offset, which means we avoid to have an extra count query each time we want to use the pagination engine. So how we deal with the last page issue? The answer is simple, if we have a limit of 10 that means I want to have pages with a size of 10 items, I will do a query of limit+1 and then I will check if we have some more items on the next page in order to know if I&rsquo;m querying the last page or not, also then we deal with the removal of the extra item when we answer back, so the frontend still will receive always 10 items max instead of having the extra item requested.</p>
+<p>In order to deal with that we should receive on the Paginate function a []interface{} and here is when some bad things appear, how we deal with the fact of article = interface{} is valid but []article = []interface{} is not valid. The standard golang recomendations told us how to do it <a href="https://golang.org/doc/faq#convert_slice_of_interface">https://golang.org/doc/faq#convert_slice_of_interface</a></p>
+<p>So most of the time you should do something ugly like this</p>
+<pre tabindex="0"><code>t := []int{1, 2, 3, 4}
+s := make([]interface{}, len(t))
+for i, v := range t {
+    s[i] = v
+}
+</code></pre><p>Is not what I like but is the way for dealing on the management of removing last item data as well to check pagination links using len([]interface{}). Probably with the approach of having the extra query we will don&rsquo;t need to deal with this.</p>
+<p>Currently (26 April 2020), there is a proposal about generics in Go, that probably will change completely how we handle this []interface{}, I tried to implement a new version using the pre build go compiler with generics, but is to limited. The idea in general is to migrate into something that you can see on that article <a href="https://blog.tempus-ex.com/generics-in-go-how-they-work-and-how-to-play-with-them/">https://blog.tempus-ex.com/generics-in-go-how-they-work-and-how-to-play-with-them/</a></p>
+<h2 id="how-to-use">How to use</h2>
+<p>The package will take the values from three different params;</p>
+<ul>
+<li>page[limit]</li>
+<li>page[offset]</li>
+<li>sort_by</li>
+</ul>
+<p>So taking into account you will have some handler similar to this</p>
+<pre tabindex="0"><code>func handler(wr http.ResponseWriter, req *http.Request) {
+
+}
+</code></pre><p>You will need to use the next function for get the pagination info</p>
+<pre tabindex="0"><code>func handler(wr http.ResponseWriter, req *http.Request) {
+  params, err := pagination.FindParams(req, defaultOffset, defaultLimit)
+
+  params.Limit
+  params.Offset
+  params.Sort
+}
+</code></pre><p>Once you get the params, the next step is to inform to your function (that will retrieve all the data) about this params object. This params object has a method named Query() string, that will return a formatted query in order to be appended on the end of your query, in the next snippet I will show you a case using sqlx</p>
+<pre tabindex="0"><code>func handler(wr http.ResponseWriter, req *http.Request) {
+  params, err := pagination.FindParams(req, defaultOffset, defaultLimit)
+
+  data := getSomeCoolData(params)
+}
+
+func getSomeCoolData(params pagination.Params) []interface{} {
+  data := []interface{}
+  db.Select(
+    &amp;data,
+    `SELECT * FROM cool_table`+params.Query,
+  )
+  return data  
+}
+</code></pre><p>This Query() method will append something like this <strong>LIMIT 10 OFFSET 0 ORDER BY created_at desc</strong></p>
+<p>The next step will be, how to deal with the data result and paginate it, after you make your paginated query and get the results the last thing you have to do is to call the Paginate function, and informa about the basice information needed, the data, the base path in order to build the different links and the pagination params.</p>
+<pre tabindex="0"><code>func handler(wr http.ResponseWriter, req *http.Request) {
+  params, err := pagination.FindParams(req, defaultOffset, defaultLimit)
+
+  data := getSomeCoolData(params)
+
+  json.NewEncoder(wr).Encode(pagination.Paginate(
+    data,
+    req.URL.EscapedPath(),
+    params,
+  ))
+}
+</code></pre><p>This will give an output like this</p>
+<pre tabindex="0"><code>{
+  &#34;data&#34;: [
+    {
+      &#34;custom_field&#34;: &#34;awesome value&#34;
+    },
+    //.....
+  ],
+  &#34;links&#34;: {
+    &#34;first&#34;: &#34;/data?page[limit]=10&amp;page[offset]=0&#34;,
+    &#34;prev&#34;: &#34;....&#34;,
+    &#34;next&#34;: &#34;....&#34;,
+    &#34;last&#34;: &#34;....&#34;
+  }
+}
+</code></pre><p>So this is a way of implement the limit/offset approach in Go, I will try to implement the other approaches so we can see the different options!</p>
+
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/04/13/hello-world/" data-toggle="tooltip" data-placement="top" title="Welcome to my blog">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2020/06/27/spaceship-shooter/" data-toggle="tooltip" data-placement="top" title="Spaceship Shooter Game">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+                
+
+                
+
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/go" title="go">
+                            go
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">                  
+                    
+                    <li>
+                        <a href="mailto:ramonmaciasgarcia@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    
+                    
+
+		            
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/ramonmacias">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/ramon-macias-garcia-4a407365/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="El Met" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; El Met 2023
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>

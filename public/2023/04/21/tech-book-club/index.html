@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="El Met">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="img/menorca_spring.jpg">
+    <meta property="twitter:image" content="img/menorca_spring.jpg" />
+    
+
+    
+    <meta name="title" content="Tech Book Club" />
+    <meta property="og:title" content="Tech Book Club" />
+    <meta property="twitter:title" content="Tech Book Club" />
+    
+
+    
+    <meta name="description" content="The Ramon personal blog">
+    <meta property="og:description" content="The Ramon personal blog" />
+    <meta property="twitter:description" content="The Ramon personal blog" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="Ramon, Macias, Blog, Go, Computer">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Tech Book Club | Ramon Blog</title>
+
+    <link rel="canonical" href="/2023/04/21/tech-book-club/">
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.15.1/css/all.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">El Met</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">All Posts</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/top/about//">ABOUT</a></li>
+                    
+		            <li>
+                        <a href="/search"><i class="fa fa-search"></i></a>
+		           </li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/menorca_spring.jpg')
+    }
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/culture" title="Culture">
+                            Culture
+                        </a>
+                        
+                        <a class="tag" href="/tags/learning" title="Learning">
+                            Learning
+                        </a>
+                        
+                    </div>
+                    <h1>Tech Book Club</h1>
+                    <h2 class="subheading">Why we use the book club</h2>
+                    <span class="meta">
+                        
+                            Posted by 
+                            
+                                Ramon
+                             
+                            on 
+                            Friday, April 21, 2023
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <blockquote>
+<p>It takes something more than intelligence to act intelligently. &ndash; Fyodor Dostoyevsky</p>
+</blockquote>
+<h2 id="proposal">Proposal</h2>
+<p>This is one of the cultural initiatives that our company has undertaken. The purpose of this confluence page is to comprehensively document all aspects related to our book club, including the reasons for its existence, the methodology we use, and the activities we engage in. Our objective is to track the books we read and record all the insights generated during our discussions.</p>
+<h2 id="why-is-it-necessary">Why is it necessary?</h2>
+<p>Before embarking on any cultural initiative, it is imperative to answer the question of why it is necessary. In this regard, we have identified several important points worth mentioning:</p>
+<ul>
+<li>
+<p><strong>Sharing ideas is the key to success:</strong> The sharing of ideas is perhaps one of the most significant actions that humans have taken in order to grow and evolve. In a smaller context, we aim to achieve the same outcome by using the book club as a tool. As tech professionals, we often find ourselves in situations where we are discussing complex issues. However, not all members of the discussion may have the same level of knowledge. The book club helps to mitigate this problem by ensuring that all members have read the same amount of information, thus facilitating a more equitable and productive discussion.</p>
+</li>
+<li>
+<p><strong>A safe space for discussions:</strong> Creating a secure environment for discussions is a significant objective of our cultural organization. The book club provides an open platform where anyone interested can participate without any judgment. It is a space where individuals can learn and grow, recognizing that progress is only possible through the acceptance of our own ignorance. We acknowledge that this is a challenging task, which is why it is crucial to offer a safe space.</p>
+</li>
+<li>
+<p><strong>Your previous tech knowledge is not important:</strong> Prior technical knowledge is not a requirement to join the book club. As a platform for learning and growth, we welcome participants with varying levels of experience. Although we do not restrict the books we read to any specific technical subject, we prioritize selecting literature that directly impacts our daily work as tech professionals.</p>
+</li>
+<li>
+<p><strong>Investment for the company:</strong> While some may view the book club as a waste of time and resources, we consider it an investment in our company&rsquo;s growth. By cultivating a team of individuals with extensive knowledge, we enable them to make better decisions and identify problems more effectively, which ultimately results in improved software quality and faster delivery times.</p>
+</li>
+<li>
+<p><strong>We do it for fun:</strong> As a remote organization, team building is essential to us. We view the book club as a means of promoting a happy and satisfying work environment, and it helps to improve talent retention. As participants voluntarily attend the book club, we assume they enjoy it, and it fosters a positive work culture.</p>
+</li>
+<li>
+<p><strong>We get benefits at multiple levels:</strong> The benefits of participating in a technical book club include the opportunity to stay current with the latest trends and best practices in one&rsquo;s field, the chance to network and connect with other professionals in the industry (in case we open the book club to the public), and the ability to develop critical thinking and communication skills through engaging in meaningful and substantive discussions. Additionally, the club can serve as a valuable team-building and retention tool for organizations, providing employees with a sense of community and purpose that can lead to increased job satisfaction and motivation.</p>
+</li>
+</ul>
+<h2 id="whats-a-book-club">What’s a book club?</h2>
+<p>A technical book club is an organized group of individuals with a shared interest in a particular technical subject or field, such as software engineering or data science, who regularly read and discuss books related to their area of expertise. The club provides a structured environment for members to deepen their knowledge and understanding of the subject matter, as well as an opportunity to share insights, ask questions, and engage in thoughtful discussions with other professionals.</p>
+<p>The technical book club typically operates on a regular schedule, with members reading a selected book or set of books over a specific time period, and then coming together to discuss the material in an open and collaborative forum. Members may take turns leading the discussions, summarizing key concepts, and posing questions to spark dialogue and reflection.</p>
+<h2 id="how-does-it-work">How does it work?</h2>
+<p>The technical book club has been a long-standing initiative that has been iteratively improved over time to ensure the comfort of all members.</p>
+<p>The following process is adhered to from selecting a book to tracking related outcomes.</p>
+<ul>
+<li>
+<p>The first step involves opening a discussion about which books to read. This is achieved through a dedicated Slack channel called #tech-book-club where all members can suggest books along with a brief description of what should be read. A week is given to allow everyone to share their book suggestions.</p>
+</li>
+<li>
+<p>Next, all the suggested books are collected and put in a poll where members can vote for their preferred book to read. There is no maximum number of votes allowed, and voting lasts for a week.</p>
+</li>
+<li>
+<p>After the voting process, a list of books is compiled, sorted by the number of votes each received. The book with the most votes is read first, and a consensus is reached on which book follows until the list is complete.</p>
+</li>
+<li>
+<p>Once a book is selected, sessions begin. Members analyze the length of each chapter and agree on how much should be read before the next session. The value can vary depending on the length of the discussions or the comfort of the members.</p>
+</li>
+<li>
+<p>The meetings take place every two weeks and last for one hour.</p>
+</li>
+<li>
+<p>All sessions are recorded and logged so that members who couldn&rsquo;t attend can watch and catch up on what was discussed.</p>
+</li>
+<li>
+<p>Finally, the book is logged on a dedicated Confluence page to inspire other members to read the book and explore related materials.</p>
+</li>
+</ul>
+
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/10/19/auth-middleware-in-go/" data-toggle="tooltip" data-placement="top" title="Auth Middleware in Go">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                </ul>
+                
+
+                
+
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/go" title="go">
+                            go
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">                  
+                    
+                    <li>
+                        <a href="mailto:ramonmaciasgarcia@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    
+                    
+
+		            
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/ramonmacias">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/ramon-macias-garcia-4a407365/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="El Met" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; El Met 2023
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>

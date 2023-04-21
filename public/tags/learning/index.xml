@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Learning on El Met</title>
+    <link>https://ramonmacias.github.io/tags/learning/</link>
+    <description>Recent content in Learning on El Met</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 21 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ramonmacias.github.io/tags/learning/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Tech Book Club</title>
+      <link>https://ramonmacias.github.io/2023/04/21/tech-book-club/</link>
+      <pubDate>Fri, 21 Apr 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ramonmacias.github.io/2023/04/21/tech-book-club/</guid>
+      <description>It takes something more than intelligence to act intelligently. &amp;ndash; Fyodor Dostoyevsky
+Proposal This is one of the cultural initiatives that our company has undertaken. The purpose of this confluence page is to comprehensively document all aspects related to our book club, including the reasons for its existence, the methodology we use, and the activities we engage in. Our objective is to track the books we read and record all the insights generated during our discussions.</description>
+    </item>
+    
+  </channel>
+</rss>
