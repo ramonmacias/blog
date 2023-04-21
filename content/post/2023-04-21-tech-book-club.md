@@ -5,7 +5,7 @@ subtitle: "Why we use the book club"
 date: 2023-04-21
 author: "Ramon"
 URL: "/2023/04/21/tech-book-club/"
-image: "img/sunset-collada-verda.jpg"
+image: "img/menorca_spring.jpg"
 tags:
     - Culture
     - Learning

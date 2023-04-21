@@ -50,6 +50,10 @@ home = ["HTML", "RSS", "Algolia"]
   disqus_proxy = ""
   disqus_site = ""
 
+  # Twikoo comments
+  # Follow https://twikoo.js.org/ to set up your own env_id
+  twikoo_env_id = ""
+
   #Enable wechat pay & alipay to allow readers send reward money if they like the articles 
   reward = true 
   # reward_guide = "如果这篇文章对你有用,请随意打赏" 
@@ -73,7 +77,8 @@ home = ["HTML", "RSS", "Algolia"]
   #instagram     = "full profile url in instagram"
   github         = "https://github.com/yourgithub"
   wechat         = "your wechat qr code image"
-#  medium         = "full profile url in medium"
+  #medium        = "full profile url in medium"
+  #slack         = "full workspace url in slack"
   #pinterest     = "full profile url in pinterest"
   #reddit        = "full profile url in reddit"
   #gitlab        = "full profile url in gitlab"
@@ -100,11 +105,14 @@ home = ["HTML", "RSS", "Algolia"]
   href = "https://unsplash.com"
   
   [[params.addtional_menus]]
-  title =  "BOOKS"
-  href =  "/top/books/"
+  title =  "ARCHIVE"
+  href =  "/archive/"
+  [[params.addtional_menus]]
+  title =  "NOTES"
+  href =  "/notes/"
   [[params.addtional_menus]]
   title =  "ABOUT"
-  href =  "/top/about/"
+  href =  "/about/"
 
 [outputFormats.Algolia]
 baseName = "algolia"
